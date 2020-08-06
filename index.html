@@ -1,0 +1,74 @@
+<!Doctype html>
+<html>
+<style>
+div.relative {
+  position: relative;
+  top: 100px;
+}
+div.center{
+margin:auto;
+height:200px;
+width:50%;
+border: solid blue;
+padding:10px;
+text-align:center;
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+console.log(value);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+
+function get(){
+  var username = getCookie("username");
+
+var decrypted = CryptoJS.AES.decrypt(username, "Secret Passphrase");
+var dec=decrypted.toString(CryptoJS.enc.Utf8);
+
+  if (dec=="susmi---susmi123") {
+ console.log(dec);
+  window.location = "file:///C:/Users/HP/Desktop/LTI/welcome.html";
+  }
+}
+function validate(){
+var username = document.getElementById("username").value;
+var password = document.getElementById("password").value;
+if ( username == "LTI" && password == "123"){
+ if(document.getElementById("check").checked== true)
+  {
+ var encrypted = CryptoJS.AES.encrypt(username+"---"+password, "Secret Passphrase");
+document.cookie = "username="+encrypted+"; max-age=86400;";
+}
+//alert ("Login successful");
+window.location = "file:///C:/Users/HP/Desktop/LTI/welcome.html"; // Redirecting to other page.
+return false;
+}
+else
+{
+alert("Invalid Username or Password");
+}
+}
+    </script>
+<form>
+<body>
+<div class = "relative">
+<form>
+<div class = "center">
+<label for = "uname">Username:</label>
+<input type = "text" name="unmae" id="username" required><br>
+<br>
+<label for = "psw">Password:</label>
+<input type = "password" id="password" name="psw" required><br><br>
+<input type = "checkbox" checked="checked" name = "rember" id = "check" > Remmber me<br>
+<button type = "submit" onclick="validate()">Login</button>
+</div>
+</form>
+</div>
+</body>
+</html>
